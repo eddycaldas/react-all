@@ -7,7 +7,12 @@ class Action extends Component {
   render() {
     return (
       <div >
-        <button onClick={this.buttonClicked}>What should I do?</button>
+        <button 
+            onClick={this.buttonClicked}
+            disabled={!this.props.hasOptions}
+            >
+             What should I do?
+        </button>
       </div>
     );
   }
