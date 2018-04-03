@@ -1,15 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Option extends Component {
-  render() {
+const Option = (props) => {
     return (
-      <div >
-        {
-            this.props.optionText
-        }
-      </div>
-    );
-  }
+        <div >
+          {props.optionText}
+        </div>
+      ); 
 }
+// Above Stateless functinal component. the keyword 'this' is not necesary.
+// class Option extends Component {
+//   render() {
+//     return (
+//       <div >
+//         {
+//             this.props.optionText
+//         }
+//       </div>
+//     );
+//   }
+// }
 
 export default Option;

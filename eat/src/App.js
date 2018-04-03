@@ -9,29 +9,56 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      option: ['tacos', 'burritos', 'hamburgers']
+      options: []
     }
-    this.handleRemoveAll = this.handleRemoveAll.bind(this)
+    this.handleRemoveAll = this.handleRemoveAll.bind(this);
+    this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
   }
   
   handleRemoveAll() {
     this.setState(() => {
       return {
-        option: []
+        options: []
       }
     })
+  }
+  
+  handlePick() {
+    const randomNumber = Math.floor(Math.random() * this.state.options.length);
+    const option = this.state.options[randomNumber]
+    alert(option)
+  }
+  
+  handleAddOption(option) {
+    if(!option) {
+      return "Enter valid value to add"
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'This option already exists'
+    } else {    
+    this.setState((prevState) => {
+      return {
+      options: prevState.options.concat([option])
+    }
+    })
+  }
   }
   
   render() {
     return (
       <div className="App">
         <Header />
-        <Action hasOptions={this.state.option.length > 0}/>
+        <Action 
+          hasOptions={this.state.options.length > 0}
+          handlePick={this.handlePick}
+        />
         <Options 
-          option={this.state.option}
+          options={this.state.options}
           handleRemoveAll={this.handleRemoveAll}
         />
-        <AddOptions />
+        <AddOptions 
+          handleAddOption={this.handleAddOption}
+        />
       </div>
     );
   }

@@ -1,21 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Action extends Component {
-    buttonClicked() {
-        alert ('clicked')
-    }
-  render() {
+const Action = (props) => {
     return (
-      <div >
-        <button 
-            onClick={this.buttonClicked}
-            disabled={!this.props.hasOptions}
-            >
-             What should I do?
-        </button>
-      </div>
-    );
-  }
+        <div >
+          <button 
+              onClick={props.handlePick}
+              disabled={!props.hasOptions}
+              >
+               What should I do?
+          </button>
+        </div>
+      );
 }
+
+// Above: stateless function component. pass props on function and 'this' is not needed.
+// class Action extends Component {
+//   render() {
+//     return (
+//       <div >
+//         <button 
+//             onClick={this.props.handlePick}
+//             disabled={!this.props.hasOptions}
+//             >
+//              What should I do?
+//         </button>
+//       </div>
+//     );
+//   }
+// }
 
 export default Action;

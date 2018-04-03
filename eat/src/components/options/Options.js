@@ -8,7 +8,7 @@ class Options extends Component {
       <div>
         <button onClick={this.props.handleRemoveAll}>Remove All</button>
         {
-          this.props.option.map((option) => 
+          this.props.options.map((option) => 
             <Option key={option} textOption={option}/>
           )
         }
