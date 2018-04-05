@@ -16,8 +16,11 @@ class AddOptions extends Component {
     this.setState(() => {
       return {
         error: error
-      }
-    })
+      };
+    });
+    if(!error) {
+      e.target.elements.option.value = '';
+  }
   }
 
   render() {

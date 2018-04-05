@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class Header extends Component {
   render() {
-    const title = 'Are you Hungry?';
+    const title = 'Are you Hungry??';
     const subtitle = 'Let Me Pick up What You Should Eat';
     return (
       <div>
