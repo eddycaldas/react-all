@@ -14,6 +14,34 @@ class App extends Component {
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleDeleteOne = this.handleDeleteOne.bind(this);
+  }
+
+  // its invoked immidiately after a component is mounted
+  componentDidMount() {
+    try {
+      const json = localStorage.getItem('options');
+      const options = JSON.parse(json);
+
+      if(options) {
+      this.setState(() => ({ options: options }))
+     }
+    } catch (e) {
+      //Do nothing at all
+    }
+    
+  }
+
+  // its invoked immidiately after updating occurs.
+   componentDidUpdate(prevProps, prevState) {
+     if(prevState.options.length !== this.state.options.length) {
+       const json = JSON.stringify(this.state.options);
+       localStorage.setItem('options', json)
+     }
+   }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount')
   }
 
   // handleDeleteOption() {
@@ -26,6 +54,14 @@ class App extends Component {
 
   handleDeleteOption() {
     this.setState(() => ( {options: []} ));
+  }
+
+  handleDeleteOne(optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => {
+        return optionToRemove !== option;
+      })
+    }))
   }
 
   handlePick() {
@@ -64,6 +100,7 @@ class App extends Component {
         <Options 
           options={this.state.options}
           handleDeleteOption={this.handleDeleteOption}
+          handleDeleteOne={this.handleDeleteOne}
         />
         <AddOption 
           handleAddOption={this.handleAddOption}

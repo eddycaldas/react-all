@@ -14,7 +14,23 @@ class App extends Component {
     this.handleRemoveAll = this.handleRemoveAll.bind(this);
     this.handlePick = this.handlePick.bind(this);
     this.handleAddOption = this.handleAddOption.bind(this);
+    this.handleRemoveOne = this.handleRemoveOne.bind(this);
   }
+  
+  componentDidMount() {
+    const json = localStorage.getItem('options');
+    const options = JSON.parse(json);
+    
+    if(options) {
+      this.setState(() => ({ options: options }))
+    }
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    const json = JSON.stringify(this.state.options);
+    localStorage.setItem('options', json)
+  }
+  
   
   handleRemoveAll() {
     this.setState(() => {
@@ -22,6 +38,14 @@ class App extends Component {
         options: []
       }
     })
+  }
+  
+  handleRemoveOne(optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => {
+        return optionToRemove !== option;
+      })
+    }))
   }
   
   handlePick() {
@@ -55,6 +79,7 @@ class App extends Component {
         <Options 
           options={this.state.options}
           handleRemoveAll={this.handleRemoveAll}
+          handleRemoveOne={this.handleRemoveOne}
         />
         <AddOptions 
           handleAddOption={this.handleAddOption}

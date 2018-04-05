@@ -23,6 +23,10 @@ class AddOption extends Component {
         // })
 
         this.setState(() => ( {error: error} ))
+
+        if(!error) {
+            e.target.elements.option.value = '';
+        }
        
     }
 

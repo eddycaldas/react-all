@@ -4,6 +4,7 @@ import Count from './components/Count';
 import Visible from './components/Visible';
 
 class App extends Component {
+  
   render() {
     return (
       <div className="App">
